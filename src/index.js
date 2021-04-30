@@ -63,28 +63,26 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.x = 1
 camera.position.y = 1
-camera.position.z = 50
+camera.position.z = 40
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+controls.enabled = true
 controls.autoRotate = true
 // controls.enableZoom = false
 controls.enablePan = false
 controls.dampingFactor = 0.05
 controls.maxDistance = 1000
 controls.minDistance = 30
-controls.touches = {
-  ONE: THREE.TOUCH.ROTATE,
-  TWO: THREE.TOUCH.DOLLY_PAN,
-}
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
+  alpha: true,
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -117,8 +115,8 @@ gsap.to(mesh.rotation, {
   },
 })
 gsap.to(mesh.scale, {
-  x: 0.3,
-  y: 0.3,
+  x: 2,
+  y: 2,
   scrollTrigger: {
     trigger: sections[2],
   },
@@ -137,9 +135,9 @@ const clock = new THREE.Clock()
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
 
+  //mesh.rotation.x += 0.01 * Math.sin(1)
   //mesh.rotation.y += 0.01 * Math.sin(1)
-  //mesh.rotation.y += 0.01 * Math.sin(1)
-  mesh.rotation.z += 0.01 * Math.sin(1)
+  //mesh.rotation.z += 0.01 * Math.sin(1)
 
   // Update controls
   controls.update()
@@ -149,5 +147,18 @@ const tick = () => {
   // Call tick again on the next frame
   window.requestAnimationFrame(tick)
 }
+/*------------------------------
+MouseMove
+------------------------------*/
+function onMouseMove(e) {
+  const x = e.clientX
+  const y = e.clientY
+
+  gsap.to(scene.rotation, {
+    y: gsap.utils.mapRange(0, window.innerWidth, 1, -1, x),
+    x: gsap.utils.mapRange(0, window.innerHeight, 1, -1, y),
+  })
+}
+window.addEventListener('mousemove', onMouseMove)
 
 tick()

@@ -1,10 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+/* custom webkit scrollbar
+ */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #202020;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #505050;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 html {
   -ms-scroll-snap-type: y mandatory;
   scroll-snap-type: y mandatory;
@@ -12,8 +32,10 @@ html {
 
 body {
   overflow-x: hidden;
-  font-family: 'Julius Sans One', sans-serif;
-  color: white;
+  font-family: 'Krona One', sans-serif;
+  background-color: rgb(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 canvas {
@@ -30,12 +52,28 @@ canvas {
   display: grid;
   place-items: center;
   scroll-snap-align: center;
-  transition: 1s ease-in-out;
+  user-select: none;
 }
 
 h1 {
   font-weight: 500;
-  font-size: 12vw;
+  font-size: 5vw;
   text-transform: uppercase;
   color: white;
+  line-height: 100%;
+  text-align: center;
+}
+h2 {
+  font-weight: 500;
+  font-size: 6vw;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
+.logo {
+  position: fixed;
+  width: 5vw;
+  bottom: 0;
+  right: 0;
+  margin: 1em;
 }
